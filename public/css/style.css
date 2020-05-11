@@ -12,3 +12,13 @@ button:hover,
 button:focus {
 text-decoration: none;
 }
+
+.section img{
+  height: 300px;
+  margin: 0 auto;
+}
+
+.card.card-cascade.narrower .view{
+  margin-top: 0;
+  padding-top: 20px;
+}
