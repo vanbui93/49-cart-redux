@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 
-export default class Product extends Component {
+export default class ProductItem extends Component {
   render() {
     var { product } = this.props;
     return (
       <div className="col-lg-4 col-md-6 mb-r">
         <div className="card text-center card-cascade narrower">
           <div className="view overlay hm-white-slight z-depth-1">
-            <img src={product.image} height={300}
-              className="img-fluid" alt={product.name} />
+            <img src={product.image} className="img-fluid" alt={product.name} />
             <button>
               <div className="mask waves-light waves-effect waves-light"></div>
             </button>
@@ -43,10 +42,10 @@ export default class Product extends Component {
   showRatings = (rating) => {
     var result = [];
     for(var i=1; i<=rating ; i ++) {
-      result.push(<i className="fa fa-star"></i>)
+      result.push(<i key={i} className="fa fa-star"></i>)
     }
     for(var j=1; i<=(5-rating); j++){
-      result.push(<i clasName="fa fa-star-o"></i>) 
+      result.push(<i  key={j} clasName="fa fa-star-o"></i>) 
     }
     return result;
   }
