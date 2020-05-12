@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import CartItem from './CartItem';
+import React, { Component } from 'react';
 
 export default class Header extends Component {
   render() {

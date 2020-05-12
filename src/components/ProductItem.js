@@ -44,6 +44,7 @@ export default class ProductItem extends Component {
 
   onAddToCart = (product) => {
     this.props.onAddToCart(product)
+    
   }
 
   showRatings = (rating) => {

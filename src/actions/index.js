@@ -8,3 +8,4 @@ export const actAddToCart = (product,quantily) => {
     quantily
   }
 }
+

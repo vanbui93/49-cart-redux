@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Cart from './../components/Cart';
 import * as Message from './../constants/Message';
-import CartItem from '../components/CartItem';
-import CartResult from '../components/CartResult';
+import CartItem from './../components/CartItem';
+import CartResult from './../components/CartResult';
 
 
 class CartContainer extends Component {
