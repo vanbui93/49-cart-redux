@@ -19,10 +19,8 @@ export default class Header extends Component {
               </tr>
             </thead>
             <tbody>
-              <CartItem/>
-              <CartItem/>
-              <CartItem/>
-              <CartResult/>
+              {this.props.children}
+              <CartResult />
             </tbody>
           </table>
         </div>
