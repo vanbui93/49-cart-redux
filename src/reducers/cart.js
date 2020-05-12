@@ -1,41 +1,45 @@
-import * as types from './../constants/ActionsType';
+import * as Types from './../constants/ActionsType';
 var data = JSON.parse(localStorage.getItem('CART'));
 
-var initialState = [
-  {
-    product: {
-      id: 1,
-      name: 'Iphone 11 Plus',
-      image: 'https://cdn.nguyenkimmall.com/images/detailed/610/10043537_IPHONE_11-PRO-MAX-64GB-XAM_01_isos-7r.jpg',
-      description: 'Sản phẩm của apple',
-      price: 500,
-      inventory: 10,
-      rating: 3
-    },
-    quantily: 5
-  },
-  {
-    product: {
-      id: 3,
-      name: 'Oppo F1s',
-      image: 'https://cdn.tgdd.vn/Products/Images/42/202703/oppo-f11-pro-128gb-400x460.png',
-      description: 'Sản phẩm của oppo',
-      price: 400,
-      inventory: 5,
-      rating: 4
-    },
-    quantily: 3
-  }
-];
+var oldState = data ? data :[];
 
-const cart = (state = initialState, action) => {
+const cart = (state = oldState, action) => {
+  var { product, quantily } = action;
+  var index = -1;
   switch (action.type) {
-    case types.ADD_TO_CART:
-      console.log(action);
+    case Types.ADD_TO_CART:
+      console.log(action.product);
+      index = findProductInCart(state, product); //state: là danh sách sản phẩm trong cart, product : là sản phẩm vừa bấm thêm ADD_TO_CART
+      console.log(index);
+
+      if (index !== -1) {
+        state[index].quantily += quantily;
+      } else {
+        state.push({
+          product,
+          quantily
+        })
+      }
+      localStorage.setItem('CART',JSON.stringify(state));
       return [...state];
     default:
       return [...state];
   }
+}
+
+var findProductInCart = (cart, product) => { //cart là oldState là 1 object
+  // console.log(cart);  //cart là oldState
+  // console.log(product); //product là action ADD_TO_CART
+  var index = -1;
+  if (cart.length > 0) {
+    for (var i = 0; i < cart.length; i++) {
+      if (cart[i].product.id === product.id) {
+        index = i;
+        break;
+      }
+    }
+  }
+  return index;
 }
 
 export default cart;

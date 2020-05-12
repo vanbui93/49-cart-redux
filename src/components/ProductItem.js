@@ -27,9 +27,11 @@ export default class ProductItem extends Component {
               {product.description}
             </p>
             <div className="card-footer">
-              <span className="left">{product.price}</span>
+              <span className="left">{product.price} $</span>
               <span className="right">
-                <button className="btn-floating blue-gradient" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Cart">
+                <button className="btn-floating blue-gradient" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Cart"
+                  onClick={() => this.onAddToCart(product)}
+                >
                   <i className="fa fa-shopping-cart"></i>
                 </button>
               </span>
@@ -39,13 +41,18 @@ export default class ProductItem extends Component {
       </div>
     )
   }
+
+  onAddToCart = (product) => {
+    this.props.onAddToCart(product)
+  }
+
   showRatings = (rating) => {
     var result = [];
-    for(var i=1; i<=rating ; i ++) {
+    for (var i = 1; i <= rating; i++) {
       result.push(<i key={i} className="fa fa-star"></i>)
     }
-    for(var j=1; i<=(5-rating); j++){
-      result.push(<i  key={j} clasName="fa fa-star-o"></i>) 
+    for (var j = 1; i <= (5 - rating); j++) {
+      result.push(<i key={j} clasName="fa fa-star-o"></i>)
     }
     return result;
   }
