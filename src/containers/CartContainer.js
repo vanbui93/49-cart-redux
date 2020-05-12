@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Cart from './../components/Cart';
 import * as Message from './../constants/Message';
 import CartItem from '../components/CartItem';
+import CartResult from '../components/CartResult';
 
 
 class CartContainer extends Component {
@@ -13,6 +14,7 @@ class CartContainer extends Component {
     return (
       <Cart>
         {this.showCartItem(cart)}
+        {this.showTotalAmount(cart)}
       </Cart>
     )
   }
@@ -25,6 +27,13 @@ class CartContainer extends Component {
           <CartItem key={index} item={item} index={index} />
         )
       })
+    }
+    return result;
+  }
+  showTotalAmount = (cart) => {
+    var result = null;
+    if (cart.length > 0) {
+      result = <CartResult cart={cart} />
     }
     return result;
   }

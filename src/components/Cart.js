@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import CartItem from './CartItem';
-import CartResult from './CartResult';
 
 export default class Header extends Component {
   render() {
@@ -20,7 +19,6 @@ export default class Header extends Component {
             </thead>
             <tbody>
               {this.props.children}
-              <CartResult />
             </tbody>
           </table>
         </div>
