@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Products from '../components/Products';
 import ProductItem from '../components/ProductItem';
 import PropTypes from 'prop-types';
-import {actAddToCart} from './../actions/index'
+import { actAddToCart, actChangeMessage } from './../actions/index'
 
 
 class ProductContainer extends Component {
@@ -18,13 +18,14 @@ class ProductContainer extends Component {
 
   showProduct = (products) => {
     var result = null;
-    var {onAddToCart} = this.props;
+    var { onAddToCart,onChangeMessage } = this.props;
     if (products.length > 0) {
       result = products.map((product, index) => {
-        return <ProductItem 
-          key={index} 
-          product={product} 
-          onAddToCart = {onAddToCart}
+        return <ProductItem
+          key={index}
+          product={product}
+          onAddToCart={onAddToCart}
+          onChangeMessage={onChangeMessage}
         />
       });
     }
@@ -36,7 +37,7 @@ class ProductContainer extends Component {
 //isRequired : product bắt buộc phải có
 //PropTypes.shape : kiểm tra từng object trong array
 ProductContainer.propTypes = {
-  products : PropTypes.arrayOf(
+  products: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
@@ -46,8 +47,11 @@ ProductContainer.propTypes = {
       inventory: PropTypes.number.isRequired,
       rating: PropTypes.number.isRequired
     })
-  ).isRequired
+  ).isRequired,
+  onChangeMessage: PropTypes.func.isRequired
 }
+
+
 
 const mapStateToProps = (state, props) => {
   return {
@@ -55,12 +59,16 @@ const mapStateToProps = (state, props) => {
   }
 }
 
-const mapDispatchToProps = (dispatch,props) => {
+const mapDispatchToProps = (dispatch, props) => {
   return {
     onAddToCart: (product) => {
-      dispatch(actAddToCart(product,1))
+      dispatch(actAddToCart(product, 1))
+    },
+    onChangeMessage: (message) => {
+      dispatch(actChangeMessage(message))
     }
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductContainer); 
