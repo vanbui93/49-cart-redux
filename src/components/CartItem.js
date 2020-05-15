@@ -29,10 +29,23 @@ export default class CartItem extends Component {
         </td>
         <td>{this.showSubTotal(item.product.price, item.quantily)} $</td>
         <td>
-          <button type="button" className="btn btn-sm btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove item">X</button>
+          <button type="button" className="btn btn-sm btn-primary waves-effect waves-light" 
+            data-toggle="tooltip" 
+            data-placement="top" title="" 
+            data-original-title="Remove item"
+            onClick={()=> this.onDelete(item.product)}
+          >
+            X
+          </button>
         </td>
       </tr>
     )
+  }
+
+  onDelete = (product) => {
+    console.log(product);
+    this.props.onDeleteProductInCart(product)
+    
   }
   showSubTotal = (price,quantily) => {
     return price*quantily;

@@ -5,7 +5,7 @@ var oldState = data ? data :[];
 
 const cart = (state = oldState, action) => {
   var { product, quantily } = action;
-  var index = -1;
+  var index = -1;   // không tìm thấy => index = -1
   switch (action.type) {
     case Types.ADD_TO_CART:
       console.log(action.product);
@@ -22,6 +22,14 @@ const cart = (state = oldState, action) => {
       }
       localStorage.setItem('CART',JSON.stringify(state));
       return [...state];
+    case Types.DELETE_PRODUCT_IN_CART:
+      index = findProductInCart(state, product);
+      if(index !== -1){
+        state.splice(index,1); //cắt phần tử ở vị trí index, cắt 1 phần tử
+      }
+      
+      localStorage.setItem('CART',JSON.stringify(state));
+      return [...state]
     default:
       return [...state];
   }
