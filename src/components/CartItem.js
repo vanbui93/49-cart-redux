@@ -58,11 +58,12 @@ export default class CartItem extends Component {
   }
 
   onUpdateQuantily = (product, quantily) => {
+    //sau khi người dùng action thì cập nhật state,
     if (quantily > 0) {
       this.setState({
         quantily: quantily
       });
-      this.props.onUpdateProductInCart(product, quantily);
+      this.props.onUpdateProductInCart(product, quantily); //truyền product và new quantily lên store
     }
   }
 
