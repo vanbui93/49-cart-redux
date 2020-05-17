@@ -1,7 +1,7 @@
 import * as Types from './../constants/ActionsType';
 var data = JSON.parse(localStorage.getItem('CART'));
 
-var oldState = data ? data :[];
+var oldState = data ? data : [];
 
 const cart = (state = oldState, action) => {
   var { product, quantily } = action;
@@ -20,15 +20,22 @@ const cart = (state = oldState, action) => {
           quantily
         })
       }
-      localStorage.setItem('CART',JSON.stringify(state));
+      localStorage.setItem('CART', JSON.stringify(state));
       return [...state];
     case Types.DELETE_PRODUCT_IN_CART:
       index = findProductInCart(state, product);
-      if(index !== -1){
-        state.splice(index,1); //cắt phần tử ở vị trí index, cắt 1 phần tử
+      if (index !== -1) {
+        state.splice(index, 1); //cắt phần tử ở vị trí index, cắt 1 phần tử
       }
-      
-      localStorage.setItem('CART',JSON.stringify(state));
+
+      localStorage.setItem('CART', JSON.stringify(state));
+      return [...state]
+    case Types.UPDATE_PRODUCT_IN_CART:
+      index = findProductInCart(state, product); //=> so sánh 2 product (state.product và action.product) giống nhau trả về index (vị trí của product)
+      if (index !== 1) {
+        state[index].quantily = quantily; //state.quantily = action.quantily (quantily mới sẽ lấy từ action của người dùng)
+      }
+      localStorage.setItem('CART', JSON.stringify(state));
       return [...state]
     default:
       return [...state];
