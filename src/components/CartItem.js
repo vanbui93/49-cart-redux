@@ -2,17 +2,11 @@ import React, { Component } from 'react';
 import * as Message from './../constants/Message';
 
 export default class CartItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      quantily: 1
-    }
-  }
 
   render() {
     var { item } = this.props;
     // console.log(item);
-    var { quantily } = item.quantily > 0 ? item : this.state;  // kiểm tra quantily ? 0 thì lấy quantily, ngược lại lấy this.state default: 1
+    var { quantily } = item;  // kiểm tra quantily ? 0 thì lấy quantily, ngược lại lấy this.state default: 1
     return (
       <tr>
         <th scope="row">
@@ -60,10 +54,8 @@ export default class CartItem extends Component {
   onUpdateQuantily = (product, quantily) => {
     //sau khi người dùng action thì cập nhật state,
     if (quantily > 0) {
-      this.setState({
-        quantily: quantily
-      });
       this.props.onUpdateProductInCart(product, quantily); //truyền product và new quantily lên store
+      this.props.onChangeMessage(Message.MSG_UPDATE_CART_SUCCESS);
     }
   }
 
