@@ -32,7 +32,7 @@ const cart = (state = oldState, action) => {
       return [...state]
     case Types.UPDATE_PRODUCT_IN_CART:
       index = findProductInCart(state, product); //=> so sánh 2 product (state.product và action.product) giống nhau trả về index (vị trí của product)
-      if (index !== 1) {
+      if (index !== -1) {
         state[index].quantily = quantily; //state.quantily = action.quantily (quantily mới sẽ lấy từ action của người dùng)
       }
       localStorage.setItem('CART', JSON.stringify(state));
